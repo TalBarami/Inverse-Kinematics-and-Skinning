@@ -117,7 +117,7 @@ using namespace glm;
 		glm::mat4 MVP = cameras[0]->GetViewProjection() * Normal;
 		
 		shaders[shaderIndx]->Bind();
-		for (int i=0; i<shapes.size();i++)
+		for (uint i=0; i < shapes.size();i++)
 		{
 			//int j = i;
 //			int counter = 0;
@@ -147,12 +147,12 @@ using namespace glm;
 			else 
 				shapes[i]->draw(GL_TRIANGLES);
 		}
-		if(shaderIndx==0 )
+		/*if(shaderIndx==0 )
 		{
 			shaders[shaderIndx]->Bind();
 			shaders[shaderIndx]->Update(cameras[0]->GetViewProjection()*scale(vec3(10,10,10)),Normal*scale(vec3(10,10,10)),0);
 			axisMesh->draw(GL_LINES);
-		}
+		}*/
 	}
 
 		void Scene::shapeRotation(vec3 v, float ang,int indx)

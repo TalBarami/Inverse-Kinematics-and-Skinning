@@ -32,8 +32,11 @@ public:
 	void makeChange();
 	void calculateStep(bool EulerVersion);
 	float Distance(int indx1, int indx2);
+	void pick_next(int offset);
+	void pick_box();
 	bool inline isActive() const { return isIKactive;} 
-	void inline dActivate() { isIKactive = false;} 
+	void inline dActivate() { isIKactive = false;}
 
+	void transformation(int type, float amt);
 };
 

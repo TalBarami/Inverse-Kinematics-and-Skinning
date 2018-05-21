@@ -40,27 +40,38 @@ float depth;
 				break;
 				case GLFW_KEY_RIGHT:
 					//scn.shapeTransformation(scn.zGlobalRotate,-20.1f);
-					scn.shapeTransformation(scn.zLocalRotate,5.f);
-//						cout<< "right: "<<endl;
+					scn.transformation(scn.zLocalRotate,5.f);
 					break;
 				case GLFW_KEY_LEFT:
 					//scn.shapeTransformation(scn.zGlobalRotate,20.1f);
-					scn.shapeTransformation(scn.zLocalRotate,-5.f);
-//					cout<< "left: "<<endl;
+					scn.transformation(scn.zLocalRotate,-5.f);
 					break;
 				case GLFW_KEY_UP:
-					//cout<< "up: "<<endl;
-					scn.shapeTransformation(scn.xGlobalRotate,5.f);
+					scn.transformation(scn.xGlobalRotate,5.f);
 					break;
 				case GLFW_KEY_DOWN:
-					scn.shapeTransformation(scn.xGlobalRotate,-5.f);
-					//cout<< "down: "<<endl;
+					scn.transformation(scn.xGlobalRotate,-5.f);
 					break;
 				case GLFW_KEY_SPACE:
 					if(scn.isActive())
+					{
 						scn.dActivate();
+					}
 					else
+					{
 						scn.makeChange();
+					}
+				case GLFW_KEY_B:
+					scn.pick_box();
+					break;
+				case GLFW_KEY_N:
+					scn.pick_next(1);
+					break;
+				case GLFW_KEY_P:
+					scn.pick_next(-1);
+					break;
+				case GLFW_KEY_C:
+					scn.changeMode();
 					//std::cout<< "change direction "<<std::endl;
 					//scn.changeDirection();
 				break;
