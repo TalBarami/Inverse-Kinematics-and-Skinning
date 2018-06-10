@@ -78,18 +78,18 @@ int main(int argc, char** argv)
 	
 	while(!glfwWindowShouldClose(display.m_window))
 	{
-		if(scn.isActive())
+		if(scn.is_active())
 		{
 			Sleep(30);
-			scn.makeChange();
+			scn.make_change();
 		}
-			display.Clear(1.0f, 1.0f, 1.0f, 1.0f);
-			if(display.IsFullscreen())
-			{
-				GLint viewport[4];
-				glfwGetFramebufferSize(display.m_window, &viewport[2], &viewport[3] );
-				window_size_callback(display.m_window, viewport[2],viewport[3]);
-			}
+		display.Clear(1.0f, 1.0f, 1.0f, 1.0f);
+		if(display.IsFullscreen())
+		{
+			GLint viewport[4];
+			glfwGetFramebufferSize(display.m_window, &viewport[2], &viewport[3] );
+			window_size_callback(display.m_window, viewport[2],viewport[3]);
+		}
 		scn.draw(0,0,false); //change false to true for axis in every joint
 
 		display.SwapBuffers();

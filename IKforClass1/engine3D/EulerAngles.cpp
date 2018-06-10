@@ -181,3 +181,10 @@ mat4 EulerAngles::makeRot() const
 {
 	return phi*theta*psi;
 }
+
+void EulerAngles::clear()
+{
+	phi = glm::mat4(1);
+	theta = glm::mat4(1);
+	psi = glm::mat4(1);
+}

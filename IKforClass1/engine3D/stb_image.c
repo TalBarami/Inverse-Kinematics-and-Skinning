@@ -288,7 +288,7 @@ static unsigned char *stbi_load_main(stbi *s, int *x, int *y, int *comp, int req
    }
    #endif
 
-   // test tga last because it's a crappy test!
+   // test tga last_link because it's a crappy test!
    if (stbi_tga_test(s))
       return stbi_tga_load(s,x,y,comp,req_comp);
    return epuc("unknown image type", "Image not of any known type, or corrupt");
@@ -4284,7 +4284,7 @@ static int stbi_info_main(stbi *s, int *x, int *y, int *comp)
    if (stbi_hdr_info(s, x, y, comp))
        return 1;
    #endif
-   // test tga last because it's a crappy test!
+   // test tga last_link because it's a crappy test!
    if (stbi_tga_info(s, x, y, comp))
        return 1;
    return e("unknown image type", "Image not of any known type, or corrupt");
@@ -4406,7 +4406,7 @@ int stbi_info_from_callbacks(stbi_io_callbacks const *c, void *user, int *x, int
       0.60   fix compiling as c++
       0.59   fix warnings: merge Dave Moore's -Wall fixes
       0.58   fix bug: zlib uncompressed mode len/nlen was wrong endian
-      0.57   fix bug: jpg last huffman symbol before marker was >9 bits but less than 16 available
+      0.57   fix bug: jpg last_link huffman symbol before marker was >9 bits but less than 16 available
       0.56   fix bug: zlib uncompressed mode len vs. nlen
       0.55   fix bug: restart_interval not initialized to 0
       0.54   allow NULL for 'int *comp'

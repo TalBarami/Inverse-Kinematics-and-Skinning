@@ -22,13 +22,6 @@ double x1 = 0, x2=0;
 double ys1 = 0, y2 = 0;
 float depth;
 	
-
-	
-
-
-	
-
-	
 	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 	{
 		if(action == GLFW_PRESS || action == GLFW_REPEAT)
@@ -39,28 +32,20 @@ float depth;
 					glfwSetWindowShouldClose(window,GLFW_TRUE);
 				break;
 				case GLFW_KEY_RIGHT:
-					//scn.shapeTransformation(scn.zGlobalRotate,-20.1f);
-					scn.transformation(scn.zLocalRotate,5.f);
+					scn.shapeTransformation(scn.zLocalRotate,5.f);
 					break;
 				case GLFW_KEY_LEFT:
-					//scn.shapeTransformation(scn.zGlobalRotate,20.1f);
-					scn.transformation(scn.zLocalRotate,-5.f);
+					scn.shapeTransformation(scn.zLocalRotate,-5.f);
 					break;
 				case GLFW_KEY_UP:
-					scn.transformation(scn.xGlobalRotate,5.f);
+					scn.shapeTransformation(scn.xGlobalRotate,5.f);
 					break;
 				case GLFW_KEY_DOWN:
-					scn.transformation(scn.xGlobalRotate,-5.f);
+					scn.shapeTransformation(scn.xGlobalRotate,-5.f);
 					break;
 				case GLFW_KEY_SPACE:
-					if(scn.isActive())
-					{
-						scn.dActivate();
-					}
-					else
-					{
-						scn.makeChange();
-					}
+					scn.set_activation(!scn.is_active());
+					break;
 				case GLFW_KEY_B:
 					scn.pick_box();
 					break;
@@ -71,9 +56,7 @@ float depth;
 					scn.pick_next(-1);
 					break;
 				case GLFW_KEY_C:
-					scn.changeMode();
-					//std::cout<< "change direction "<<std::endl;
-					//scn.changeDirection();
+					scn.change_mode();
 				break;
 			default:
 				break;

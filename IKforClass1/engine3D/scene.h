@@ -14,9 +14,10 @@ protected:
 	Shape *axisMesh;
 
 	std::vector<int> chainParents;
-	int pickedShape;
+	
 	static const int scaleFactor = 3;
 public:
+	int pickedShape;
 	enum axis{xAxis,yAxis,zAxis};
 	enum transformations{xLocalTranslate,yLocalTranslate,zLocalTranslate,xGlobalTranslate,yGlobalTranslate,zGlobalTranslate,
 		xLocalRotate,yLocalRotate,zLocalRotate,xGlobalRotate,yGlobalRotate,zGlobalRotate,xScale,yScale,zScale,xCameraTranslate,yCameraTranslate,zCameraTranslate};
@@ -37,12 +38,15 @@ public:
 	void draw(int shaderIndx,int cameraIndx,bool drawAxis);
 	void shapeTransformation(int type,float amt);
 	void shapeRotation(glm::vec3 v, float ang,int indx);
+	void shapeRotation(float z, float x, int indx);
 	//void inline setPicked(int pickID){pickedShape = pickID;}
 	float picking(double x,double y);
 	void resize(int width,int hight,int near,int far);
 	//void updateTipPosition(int indx);
-	glm::vec3 getTipPosition(int indx);
-	glm::vec3 getDistination(int indx);
+	glm::vec3 get_tip(int indx);
+	glm::vec3 get_center(int indx);
+	glm::vec3 get_base(int indx);
+	void clear_rotation(int indx);
 	glm::vec3 getAxisDirection(int indx,int axis);
 	inline void setParent(int indx,int newValue) {chainParents[indx]=newValue;}
 	virtual ~Scene(void);
