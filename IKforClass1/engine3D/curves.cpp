@@ -214,10 +214,10 @@ std::vector <glm::vec3> Surface::calcSurface(const std::vector <glm::vec3> &cont
 }
 
 glm::vec3 Surface::calcWeight(float s, float t, std::vector <glm::vec3> &surface)
-{
-	float f1 = (1 - 4.0f*(1-s)*s)*(1-s);
-	float f2 = (1.5-s)*(s+0.5);
-	float f3 =  (1 - 4.0f*(1-s)*s)*s;
+ {
+	float f1 = (1 - 4.0f*(1-s)*s)*(1-s)/2.0f;
+	float f2 = (2.0f*(1-s)*s+0.5f);
+	float f3 =  (1 - 4.0f*(1-s)*s)*s/2.0f;
 	return glm::vec3(f1,f2,f3);
 }
 
@@ -327,7 +327,7 @@ IndexedModel Surface::ToIndexedModel()
 					result.normals.push_back(calcNormal((float)i / xResolution, (float)j / yResolution, s));
 					result.texCoords.push_back(glm::vec2((float)i / xResolution, (float)j / yResolution));
 					result.colors.push_back(calcWeight((float)i / xResolution, (float)j / yResolution,s));
-					result.weights.push_back(calcWeight((float)(i+1) / xResolution, (float)(j+1) / yResolution,s));
+					result.weights.push_back(calcWeight((float)i / xResolution, (float)j / yResolution,s));
 
 					result.indices.push_back(indx++);
 					result.positions.push_back(calcNurbs((float)(i+1) / xResolution, (float)(j+1) / yResolution, s));
@@ -336,26 +336,12 @@ IndexedModel Surface::ToIndexedModel()
 					result.colors.push_back(calcWeight((float)(i+1) / xResolution, (float)(j+1) / yResolution,s));
 					result.weights.push_back(calcWeight((float)(i+1) / xResolution, (float)(j+1) / yResolution,s));
 					
-					/*
-					result.indices.push_back(indx++);
-					result.positions.push_back(*(result.positions.end()-2));
-					result.normals.push_back(*(result.normals.end()-2));
-					result.texCoords.push_back(glm::vec2((float)i / xResolution, (float)j / yResolution));
-					result.colors.push_back(glm::vec3(0,0.7f,1.0f));
-					result.colors.push_back(glm::vec3(0,0.7f,1.0f));
-
-					result.indices.push_back(indx++);
-					result.positions.push_back(*(result.positions.end()-1));
-					result.normals.push_back(*(result.normals.end()-1));
-					result.texCoords.push_back(glm::vec2((float)(i+1) / xResolution, (float)(j+1) / yResolution));
-					result.colors.push_back(glm::vec3(0,0.7f,1.0f));
-					*/
 					result.indices.push_back(indx++);
 					result.positions.push_back(calcNurbs((float)i / xResolution, (float)(j+1) / yResolution, s));
 					result.normals.push_back(calcNormal((float)i / xResolution, (float)(j+1) / yResolution, s));	
 					result.texCoords.push_back(glm::vec2((float)i / xResolution, (float)(j+1) / yResolution));
 					result.colors.push_back(calcWeight((float)i / xResolution, (float)(j+1) / yResolution,s));
-					result.weights.push_back(calcWeight((float)(i+1) / xResolution, (float)(j+1) / yResolution,s));
+					result.weights.push_back(calcWeight((float)i / xResolution, (float)(j+1) / yResolution,s));
 					
 				}
 			}

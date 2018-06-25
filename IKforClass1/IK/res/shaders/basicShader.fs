@@ -3,6 +3,7 @@
 varying vec2 texCoord0;
 varying vec3 normal0;
 varying vec3 color0;
+varying vec3 weight0;
 
 uniform sampler2D sampler;
 uniform vec3 lightDirection;

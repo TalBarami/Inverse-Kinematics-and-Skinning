@@ -29,7 +29,7 @@ Shader::Shader(const std::string& fileName)
 	glBindAttribLocation(m_program, 1, "texCoord");
 	glBindAttribLocation(m_program, 2, "normal");
 	glBindAttribLocation(m_program, 3, "color");
-
+	glBindAttribLocation(m_program, 4, "weight");
 
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");
@@ -41,6 +41,9 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[1] = glGetUniformLocation(m_program, "Normal");
 	m_uniforms[2] = glGetUniformLocation(m_program, "lightDirection");
 	m_uniforms[3] = glGetUniformLocation(m_program, "lightColor");
+	m_uniforms[4] = glGetUniformLocation(m_program, "links_num");
+	m_uniforms[5] = glGetUniformLocation(m_program, "link");
+	m_uniforms[6] = glGetUniformLocation(m_program, "T");
 }
 
 Shader::~Shader()
@@ -59,7 +62,7 @@ void Shader::Bind()
 	glUseProgram(m_program);
 }
 
-void Shader::Update( glm::mat4 MVP ,glm::mat4 Normal , int const shpIndx)
+void Shader::Update(glm::mat4 MVP ,glm::mat4 Normal , int const shpIndx, const int links_num, std::vector<glm::mat4> T)
 {
 
 	
@@ -76,6 +79,10 @@ void Shader::Update( glm::mat4 MVP ,glm::mat4 Normal , int const shpIndx)
 	glUniformMatrix4fv(m_uniforms[1], 1, GL_FALSE, &Normal[0][0]);
 	glUniform3f(m_uniforms[2], 0.0f, 0.0f, 1.0f);
 	glUniform3f(m_uniforms[3], r/255.0f, g/255.0f, b/255.0f);
+
+	glUniform1i(m_uniforms[4], links_num);
+	glUniform1i(m_uniforms[5], shpIndx);
+	glUniformMatrix4fv(m_uniforms[6], T.size(), GL_FALSE, &T[0][0][0]);
 }
 
 std::string Shader::LoadShader(const std::string& fileName)

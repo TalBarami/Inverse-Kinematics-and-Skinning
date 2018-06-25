@@ -2,6 +2,7 @@
 #include <GL\glew.h>
 #include "scene.h"
 #include <iostream>
+#include "../IK/IK.h"
 
 using namespace std;
 using namespace glm;
@@ -116,6 +117,8 @@ using namespace glm;
 		glm::mat4 Normal = makeTrans();
 		glm::mat4 MVP = cameras[0]->GetViewProjection() * Normal;
 
+		std::vector<glm::mat4> T;
+
 		shaders[shaderIndx]->Bind();
 		for (uint i = 0; i < shapes.size(); i++)
 		{
@@ -130,17 +133,18 @@ using namespace glm;
 
 			mat4 MVP1 = MVP * Normal1;
 			Normal1 = Normal * Normal1;
-
+			
 			if (shaderIndx == 0 && drawAxis && chainParents[i] >= 0)
 			{
-				shaders[shaderIndx]->Update(axisMesh->makeTransScale(MVP1), axisMesh->makeTransScale(Normal1), 0);
+				shaders[shaderIndx]->Update(axisMesh->makeTransScale(MVP1), axisMesh->makeTransScale(Normal1), 0, linksNum, T);
 				axisMesh->draw(GL_LINES);
 			}
 
 			MVP1 = MVP1 * shapes[i]->makeTransScale(mat4(1));
 			Normal1 = Normal1 * shapes[i]->makeTrans();
+			T.push_back(MVP1);
 
-			shaders[shaderIndx]->Update(MVP1, Normal1, i);
+			shaders[shaderIndx]->Update(MVP1, Normal1, i, linksNum, T);
 
 			if (shaderIndx == 1)
 				shapes[i]->draw(GL_TRIANGLES);
@@ -150,7 +154,7 @@ using namespace glm;
 		if(shaderIndx==0)
 		{
 			shaders[shaderIndx]->Bind();
-			shaders[shaderIndx]->Update(cameras[0]->GetViewProjection()*scale(vec3(10,10,10)),Normal*scale(vec3(10,10,10)),0);
+			shaders[shaderIndx]->Update(cameras[0]->GetViewProjection()*scale(vec3(10,10,10)),Normal*scale(vec3(10,10,10)),0, linksNum, T);
 			axisMesh->draw(GL_LINES);
 		}
 	}

@@ -2,7 +2,8 @@
 #define SHADER_INCLUDED_H
 
 #include <string>
-#include "glm\glm.hpp"
+#include "glm/glm.hpp"
+#include <vector>
 
 class Shader
 {
@@ -10,13 +11,13 @@ public:
 	Shader(const std::string& fileName);
 
 	void Bind();
-	void Update( glm::mat4 MVP ,glm::mat4 Normal , int const shpIndx);
+	void Update(glm::mat4 MVP, glm::mat4 Normal, int shpIndx, int links_num, std::vector<glm::mat4> T);
 
 	virtual ~Shader();
 protected:
 private:
 	static const unsigned int NUM_SHADERS = 2;
-	static const unsigned int NUM_UNIFORMS = 4;
+	static const unsigned int NUM_UNIFORMS = 7;
 	void operator=(const Shader& shader) {}
 	Shader(const Shader& shader) {}
 	

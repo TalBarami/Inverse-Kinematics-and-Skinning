@@ -49,10 +49,11 @@ private:
 	TEXCOORD_VB,
 	NORMAL_VB,
 	INDEX_VB,
-	COLOR_VB
+	COLOR_VB,
+	WEIGHT_VB
 	};
 
-	static const unsigned int NUM_BUFFERS = 5;
+	static const unsigned int NUM_BUFFERS = 6;
 	void operator=(const Mesh& mesh) {}
 	Mesh(const Mesh& mesh) {}
 
